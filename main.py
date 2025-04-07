@@ -1,4 +1,14 @@
-file = open("quiz_data.txt", "a")
+filename = "quiz_data.txt"
+filename_counter = 0
+
+while True:
+    try:
+        file = open(filename, "x")
+        break
+    except FileExistsError:
+        filename_counter += 1
+        filename = f"quiz_data_{filename_counter}.txt"
+
 question_data = []
 
 while True:
@@ -28,4 +38,5 @@ while True:
 
 # Write the question_data only on exit
 file.write(str(question_data))
+file.close()
 
