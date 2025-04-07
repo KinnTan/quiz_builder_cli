@@ -1,3 +1,4 @@
+file = open("quiz_data.txt", "a")
 question_list = []
 
 while True:
@@ -23,6 +24,7 @@ while True:
                 "correct_answer":correct_choice
                 })
 
+    file.write(str(question_list))
     #test usage
-    print(question_list[0]["question_data"]["question"])
+    print(question_list[0]["question"])
 
