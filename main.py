@@ -11,17 +11,27 @@ while True:
 
 question_data = []
 
+print("""
+ ██████╗ ██╗   ██╗██╗███████╗    ██████╗ ██╗   ██╗██╗██╗     ██████╗ ███████╗██████╗      ██████╗██╗     ██╗
+██╔═══██╗██║   ██║██║╚══███╔╝    ██╔══██╗██║   ██║██║██║     ██╔══██╗██╔════╝██╔══██╗    ██╔════╝██║     ██║
+██║   ██║██║   ██║██║  ███╔╝     ██████╔╝██║   ██║██║██║     ██║  ██║█████╗  ██████╔╝    ██║     ██║     ██║
+██║▄▄ ██║██║   ██║██║ ███╔╝      ██╔══██╗██║   ██║██║██║     ██║  ██║██╔══╝  ██╔══██╗    ██║     ██║     ██║
+╚██████╔╝╚██████╔╝██║███████╗    ██████╔╝╚██████╔╝██║███████╗██████╔╝███████╗██║  ██║    ╚██████╗███████╗██║
+ ╚══▀▀═╝  ╚═════╝ ╚═╝╚══════╝    ╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝     ╚═════╝╚══════╝╚═╝
+                                                                                                            
+""")
 while True:
-    question = input("Enter the question you want to add (or type 'exit' to quit): ")
+    question = input("Enter the question (or type 'exit' to quit): ")
     if question.lower() == "exit" :
         break
-    choice_a = input("Enter a choice for a: ").lower()
-    choice_b = input("Enter a choice for b: ").lower()
-    choice_c = input("Enter a choice for c: ").lower()
-    choice_d = input("Enter a choice for d: ").lower()
+    print("Enter the choices")
+    choice_a = input("Choice a: ").lower()
+    choice_b = input("Choice b: ").lower()
+    choice_c = input("Choice c: ").lower()
+    choice_d = input("Choice d: ").lower()
 
     while True:
-        correct_choice = input("Enter the correct choice: "). lower()
+        correct_choice = input("What is the correct choice: "). lower()
         if correct_choice not in ["a", "b", "c", "d"]:
             print("Invalid choice")
         else:
@@ -35,6 +45,10 @@ while True:
                 "d":choice_d,
                 "correct_answer":correct_choice
                 })
+    print("Question added successfully")
+
+print("exiting...")
+print(f"Saving quiz to {filename}")
 
 # Write the question_data only on exit
 file.write(str(question_data))
