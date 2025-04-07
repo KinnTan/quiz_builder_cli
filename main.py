@@ -1,8 +1,10 @@
 file = open("quiz_data.txt", "a")
-question_list = []
+question_data = []
 
 while True:
-    question = input("Enter the question you want to add: ")
+    question = input("Enter the question you want to add (or type 'exit' to quit): ")
+    if question.lower() == "exit" :
+        break
     choice_a = input("Enter a choice for a: ").lower()
     choice_b = input("Enter a choice for b: ").lower()
     choice_c = input("Enter a choice for c: ").lower()
@@ -15,7 +17,7 @@ while True:
         else:
             break
 
-    question_list.append({
+    question_data.append({
                 "question":question,
                 "a":choice_a,
                 "b":choice_b,
@@ -24,7 +26,6 @@ while True:
                 "correct_answer":correct_choice
                 })
 
-    file.write(str(question_list))
-    #test usage
-    print(question_list[0]["question"])
+# Write the question_data only on exit
+file.write(str(question_data))
 
