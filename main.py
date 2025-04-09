@@ -1,56 +1,88 @@
-filename = "quiz_data.txt"
-filename_counter = 0
-
-while True:
-    try:
-        file = open(filename, "x")
-        break
-    except FileExistsError:
-        filename_counter += 1
-        filename = f"quiz_data_{filename_counter}.txt"
-
-question_data = []
-
-print("""
- ██████╗ ██╗   ██╗██╗███████╗    ██████╗ ██╗   ██╗██╗██╗     ██████╗ ███████╗██████╗      ██████╗██╗     ██╗
-██╔═══██╗██║   ██║██║╚══███╔╝    ██╔══██╗██║   ██║██║██║     ██╔══██╗██╔════╝██╔══██╗    ██╔════╝██║     ██║
-██║   ██║██║   ██║██║  ███╔╝     ██████╔╝██║   ██║██║██║     ██║  ██║█████╗  ██████╔╝    ██║     ██║     ██║
-██║▄▄ ██║██║   ██║██║ ███╔╝      ██╔══██╗██║   ██║██║██║     ██║  ██║██╔══╝  ██╔══██╗    ██║     ██║     ██║
-╚██████╔╝╚██████╔╝██║███████╗    ██████╔╝╚██████╔╝██║███████╗██████╔╝███████╗██║  ██║    ╚██████╗███████╗██║
- ╚══▀▀═╝  ╚═════╝ ╚═╝╚══════╝    ╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝     ╚═════╝╚══════╝╚═╝
-                                                                                                            
-""")
-while True:
-    question = input("Enter the question (or type 'exit' to quit): ")
-    if question.lower() == "exit" :
-        break
-    print("Enter the choices")
-    choice_a = input("Choice a: ").lower()
-    choice_b = input("Choice b: ").lower()
-    choice_c = input("Choice c: ").lower()
-    choice_d = input("Choice d: ").lower()
-
+# Generates a unique filename if the default one exists
+def unique_filename():
+    filename = "quiz_data.txt"
+    file_counter = 0
     while True:
-        correct_choice = input("What is the correct choice: "). lower()
-        if correct_choice not in ["a", "b", "c", "d"]:
-            print("Invalid choice")
-        else:
+        try:
+            open(filename, "x")
             break
+        except FileExistsError:
+            file_counter += 1
+            filename = f"quiz_data_{file_counter}.txt"
+    return filename
 
+# Saves the quiz data to a txt file
+def save_data(question_data):
+    filename = unique_filename()
+    file = open(filename, "w")
+    print("exiting...")
+    print(f"Saving quiz to {filename}")
+    file.write(str(question_data))
+    file.close()
+
+# Writes the data to the txt file
+def write_data(question_data, question, choices, correct_choice):
     question_data.append({
                 "question":question,
-                "a":choice_a,
-                "b":choice_b,
-                "c":choice_c,
-                "d":choice_d,
+                "choices":choices,
                 "correct_answer":correct_choice
                 })
     print("Question added successfully")
 
-print("exiting...")
-print(f"Saving quiz to {filename}")
+    return question_data
 
-# Write the question_data only on exit
-file.write(str(question_data))
-file.close()
+# Prompts the user for a question
+def get_question():
+    while True:
+        question = input("Enter the question (or type 'exit' to quit): ")
+        if question.lower() == "exit" :
+            return None
+        elif question == "":
+            print("Please enter a question")
+            continue
+        return question
 
+# Prompts the user for the choices
+def get_choices():
+    choices = {}
+    while True:
+        print("Enter the choices")
+        for option in ["a", "b", "c", "d"]:
+            choices[option] = input(f"Choice {option}: ")
+        return choices
+
+# Prompts the user for the correct choice
+def get_correct_choice():
+    while True:
+        correct_choice = input("What is the correct choice: ").lower()
+        if correct_choice not in ["a", "b", "c", "d"]:
+            print("Invalid choice")
+        else:
+            break
+        return correct_choice
+
+def main():
+    question_data = []
+    # Logo
+    print("""
+     ██████╗ ██╗   ██╗██╗███████╗    ██████╗ ██╗   ██╗██╗██╗     ██████╗ ███████╗██████╗      ██████╗██╗     ██╗
+    ██╔═══██╗██║   ██║██║╚══███╔╝    ██╔══██╗██║   ██║██║██║     ██╔══██╗██╔════╝██╔══██╗    ██╔════╝██║     ██║
+    ██║   ██║██║   ██║██║  ███╔╝     ██████╔╝██║   ██║██║██║     ██║  ██║█████╗  ██████╔╝    ██║     ██║     ██║
+    ██║▄▄ ██║██║   ██║██║ ███╔╝      ██╔══██╗██║   ██║██║██║     ██║  ██║██╔══╝  ██╔══██╗    ██║     ██║     ██║
+    ╚██████╔╝╚██████╔╝██║███████╗    ██████╔╝╚██████╔╝██║███████╗██████╔╝███████╗██║  ██║    ╚██████╗███████╗██║
+     ╚══▀▀═╝  ╚═════╝ ╚═╝╚══════╝    ╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝     ╚═════╝╚══════╝╚═╝
+
+    """)
+    while True:
+        question = get_question()
+        if question is None:
+            break
+        else:
+            choices = get_choices()
+            correct_choice = get_correct_choice()
+            write_data(question_data, question, choices, correct_choice)
+    # Saves the data to a txt file
+    save_data(question_data)
+
+if __name__ == "__main__":
+    main()
