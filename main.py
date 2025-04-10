@@ -1,7 +1,9 @@
+import json
+
 # Generates a unique filename if the default one exists
 def unique_filename():
     # Set default filename
-    filename = "quiz_data.txt"
+    filename = "quiz_data.json"
     file_counter = 0
 
     # Try to create a file with the default name
@@ -12,11 +14,11 @@ def unique_filename():
         except FileExistsError:
             # If the file exists, increment the counter and try a new name
             file_counter += 1
-            filename = f"quiz_data_{file_counter}.txt"
+            filename = f"quiz_data_{file_counter}.json"
     return filename # Return the final unique filename
 
-# Saves the quiz data to a txt file
-def save_data(question_data):
+# Saves the quiz data to a json file
+def save_data(quiz_data):
     # Generate a unique filename
     filename = unique_filename()
 
@@ -27,16 +29,16 @@ def save_data(question_data):
     print("exiting...")
     print(f"Saving quiz to {filename}")
 
-    # Write the quiz data to the file
-    file.write(str(question_data))
+    # Write the quiz data to the file in json formatting
+    file.write(str(json.dumps(quiz_data, indent=4)))
 
     # Close the file
     file.close()
 
-# Writes the data to the txt file
-def write_data(question_data, question, choices, correct_choice):
+# Writes the data to the initialized list
+def write_data(quiz_data, question, choices, correct_choice):
     # Store the question and choices in a dictionary
-    (question_data.append
+    (quiz_data.append
     ({
                 "question":question,
                 "choices":choices,
@@ -44,7 +46,7 @@ def write_data(question_data, question, choices, correct_choice):
     }))
     # Confirm that the question has been added
     print("Question added successfully")
-    return question_data  # Return the updated data
+    return quiz_data  # Return the updated data
 
 # Prompts the user for a question
 def get_question():
@@ -89,7 +91,7 @@ def get_correct_choice():
     return correct_choice # Return the correct answer
 
 def main():
-    question_data = [] # Initialize an empty list to store quiz data
+    quiz_data = [] # Initialize an empty list to store quiz data
 
     # Display the Logo
     print("""
@@ -111,10 +113,10 @@ def main():
         else:
             choices = get_choices() # Get the possible answers
             correct_choice = get_correct_choice() # Get the correct answer from the user
-            write_data(question_data, question, choices, correct_choice) # Store the question and answer choices
+            write_data(quiz_data, question, choices, correct_choice) # Store the question and answer choices
 
-    # Saves the data to a txt file
-    save_data(question_data)
+    # Saves the data to a json file
+    save_data(quiz_data)
 
 if __name__ == "__main__":
     main()
