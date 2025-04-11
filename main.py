@@ -40,11 +40,13 @@ def save_data(quiz_data):
     file = open(filename, "w")
 
     # Notify the user
-    print("exiting...")
-    print(f"Saving quiz to {filename}")
+    loading_animation(0.3, "exiting...")
+    loading_animation(0.9, f"Saving quiz to {filename}")
 
     # Write the quiz data to the file in json formatting
     file.write(str(json.dumps(quiz_data, indent=4)))
+
+    print(f"\rSuccessfully saved quiz to {filename}")
 
     # Close the file
     file.close()
@@ -67,7 +69,7 @@ def write_data(quiz_data, question, choices, correct_choice):
 def get_question():
     while True:
         # Ask the user for a question
-        question = input("Enter the question (or type 'exit' to quit): ")
+        question = input("Enter the question (or type 'exit' to save and quit): ")
 
         # If the user types "exit", stop asking and return None
         if question.lower() == "exit" :
