@@ -1,4 +1,16 @@
 import json
+import time
+
+def loading_animation():
+    spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
+    counter = 0
+
+    while True:
+        print(f"\r{spinner[counter]}", end="")
+        time.sleep(0.1)
+        counter += 1
+        if counter >= len(spinner):
+            counter = 0
 
 # Generates a unique filename if the default one exists
 def unique_filename():
