@@ -1,18 +1,17 @@
 import json
 import time
 
+# Displays a loading spinner for a given duration with a custom message
 def loading_animation(duration, message):
     spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
-    counter = 0
-    start_time = time.time()
-
+    start_time = time.time() # Record the start time to track the duration
     while True:
-        print(f"\r{spinner[counter]} {message}", end="")
-        time.sleep(0.1)
-        counter += 1
-        if counter >= len(spinner):
-            counter = 0
-        elif time.time() - start_time > duration:
+        for i in spinner:
+            print(f"\r{i} {message}", end="") # Print the spinner and message on the same line
+            time.sleep(0.1) # Pause briefly to create the animation effect
+
+        # Check if the total elapsed time has exceeded the specified duration
+        if time.time() - start_time > duration:
             break
 
 # Generates a unique filename if the default one exists
