@@ -1,5 +1,23 @@
+import os
 import json
 import time
+
+# Display the Logo
+def display_logo():
+    print("""
+     ██████╗ ██╗   ██╗██╗███████╗    ██████╗ ██╗   ██╗██╗██╗     ██████╗ ███████╗██████╗      ██████╗██╗     ██╗
+    ██╔═══██╗██║   ██║██║╚══███╔╝    ██╔══██╗██║   ██║██║██║     ██╔══██╗██╔════╝██╔══██╗    ██╔════╝██║     ██║
+    ██║   ██║██║   ██║██║  ███╔╝     ██████╔╝██║   ██║██║██║     ██║  ██║█████╗  ██████╔╝    ██║     ██║     ██║
+    ██║▄▄ ██║██║   ██║██║ ███╔╝      ██╔══██╗██║   ██║██║██║     ██║  ██║██╔══╝  ██╔══██╗    ██║     ██║     ██║
+    ╚██████╔╝╚██████╔╝██║███████╗    ██████╔╝╚██████╔╝██║███████╗██████╔╝███████╗██║  ██║    ╚██████╗███████╗██║
+     ╚══▀▀═╝  ╚═════╝ ╚═╝╚══════╝    ╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝     ╚═════╝╚══════╝╚═╝
+
+    """)
+
+#clears the terminal interface
+def clear_screen():
+    os.system('cls')
+    display_logo() # print the logo everytime interface clears
 
 # Displays a loading spinner for a given duration with a custom message
 def loading_animation(duration, message):
@@ -39,6 +57,8 @@ def save_data(quiz_data):
     # Open the file for writing
     file = open(filename, "w")
 
+    clear_screen()
+
     # Notify the user
     loading_animation(0.3, "exiting...")
     loading_animation(0.9, f"Saving quiz to {filename}")
@@ -62,6 +82,7 @@ def write_data(quiz_data, question, choices, correct_choice):
     }))
     # Confirm that the question has been added
     loading_animation(0.9, "Storing question...")
+    clear_screen()
     print("\rQuestion stored successfully")
     return quiz_data  # Return the updated data
 
@@ -69,7 +90,7 @@ def write_data(quiz_data, question, choices, correct_choice):
 def get_question():
     while True:
         # Ask the user for a question
-        question = input("Enter the question (or type 'exit' to save and quit): ")
+        question = input("Enter the question [type 'exit' to save and quit]:\n")
 
         # If the user types "exit", stop asking and return None
         if question.lower() == "exit" :
@@ -108,18 +129,8 @@ def get_correct_choice():
     return correct_choice # Return the correct answer
 
 def main():
+    clear_screen() # clears the terminal on startup, also print the logo
     quiz_data = [] # Initialize an empty list to store quiz data
-
-    # Display the Logo
-    print("""
-     ██████╗ ██╗   ██╗██╗███████╗    ██████╗ ██╗   ██╗██╗██╗     ██████╗ ███████╗██████╗      ██████╗██╗     ██╗
-    ██╔═══██╗██║   ██║██║╚══███╔╝    ██╔══██╗██║   ██║██║██║     ██╔══██╗██╔════╝██╔══██╗    ██╔════╝██║     ██║
-    ██║   ██║██║   ██║██║  ███╔╝     ██████╔╝██║   ██║██║██║     ██║  ██║█████╗  ██████╔╝    ██║     ██║     ██║
-    ██║▄▄ ██║██║   ██║██║ ███╔╝      ██╔══██╗██║   ██║██║██║     ██║  ██║██╔══╝  ██╔══██╗    ██║     ██║     ██║
-    ╚██████╔╝╚██████╔╝██║███████╗    ██████╔╝╚██████╔╝██║███████╗██████╔╝███████╗██║  ██║    ╚██████╗███████╗██║
-     ╚══▀▀═╝  ╚═════╝ ╚═╝╚══════╝    ╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝     ╚═════╝╚══════╝╚═╝
-
-    """)
 
     while True:
         question = get_question() # Get a new question from the user
