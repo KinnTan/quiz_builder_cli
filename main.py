@@ -1,16 +1,19 @@
 import json
 import time
 
-def loading_animation():
+def loading_animation(duration, message):
     spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
     counter = 0
+    start_time = time.time()
 
     while True:
-        print(f"\r{spinner[counter]}", end="")
+        print(f"\r{spinner[counter]} {message}", end="")
         time.sleep(0.1)
         counter += 1
         if counter >= len(spinner):
             counter = 0
+        elif time.time() - start_time > duration:
+            break
 
 # Generates a unique filename if the default one exists
 def unique_filename():
@@ -57,7 +60,8 @@ def write_data(quiz_data, question, choices, correct_choice):
                 "correct_answer":correct_choice
     }))
     # Confirm that the question has been added
-    print("Question added successfully")
+    loading_animation(0.9, "Storing question...")
+    print("\rQuestion stored successfully")
     return quiz_data  # Return the updated data
 
 # Prompts the user for a question
