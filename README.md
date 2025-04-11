@@ -34,8 +34,7 @@ Saving quiz to quiz_data.json
 - The JSON file is saved in the same directory where the script is run.
 - Each time you run the script, a new file will be created if one already exists.
 
-## Potential feature additions (if I can do it before deadline)
+## Potential feature additions  <sup><sup><sub>if I can do it before deadline</sub></sup></sup>
 - Create an output folder
 - Allow user to choose a filename
-- UI enhancment
-- Better user expeirence
+- UI/UX enhancment
