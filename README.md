@@ -7,9 +7,22 @@ This script allows users to create a custom quiz by entering questions, answer c
 - Python 3.x
 - No external libraries are required beyond Python's built-in libraries (such as `json`).
 
+## Installation
+
+**Option 1: Clone the Repository**
+
+   ```bash
+   git clone https://github.com/KinnTan/quiz_builder_cli.git
+   cd quiz_builder_cli
+   ```
+**Option 2: Download From Release**
+1. Go to the Releases page.
+2. Download the latest `.zip` or `.tar.gz` release.
+3. Extract the archive and navigate to the extracted folder in your terminal.
+
 ## Usage
 
-1. Run the script by executing `python <script_name>.py` in the terminal.
+1. Run the script by executing `python quiz_builder_cli.py` in the terminal.
 2. Follow the prompts to enter quiz questions, choices, and the correct answer.
 3. Type 'exit' when you are finished creating the quiz.
 4. The quiz data will be saved to a JSON file, which will be automatically named to avoid conflicts with existing files.
@@ -35,6 +48,6 @@ Saving quiz to quiz_data.json
 - Each time you run the script, a new file will be created if one already exists.
 
 ## Potential Improvments  <sup><sup><sub>if I can do it before deadline</sub></sup></sup>
-- Create an output folder
+- Automatically create an output folder
 - Allow user to choose a filename
-- UI/UX enhancment - partially done
+- more UI/UX enhancment
