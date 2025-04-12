@@ -4,14 +4,14 @@ import time
 
 # Display the Logo
 def display_logo():
-    print("""
+    print("""\033[32m
      ██████╗ ██╗   ██╗██╗███████╗    ██████╗ ██╗   ██╗██╗██╗     ██████╗ ███████╗██████╗      ██████╗██╗     ██╗
     ██╔═══██╗██║   ██║██║╚══███╔╝    ██╔══██╗██║   ██║██║██║     ██╔══██╗██╔════╝██╔══██╗    ██╔════╝██║     ██║
     ██║   ██║██║   ██║██║  ███╔╝     ██████╔╝██║   ██║██║██║     ██║  ██║█████╗  ██████╔╝    ██║     ██║     ██║
     ██║▄▄ ██║██║   ██║██║ ███╔╝      ██╔══██╗██║   ██║██║██║     ██║  ██║██╔══╝  ██╔══██╗    ██║     ██║     ██║
     ╚██████╔╝╚██████╔╝██║███████╗    ██████╔╝╚██████╔╝██║███████╗██████╔╝███████╗██║  ██║    ╚██████╗███████╗██║
      ╚══▀▀═╝  ╚═════╝ ╚═╝╚══════╝    ╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝     ╚═════╝╚══════╝╚═╝
-
+\033[0m
     """)
 
 #clears the terminal interface
@@ -60,13 +60,13 @@ def save_data(quiz_data):
     clear_screen()
 
     # Notify the user
-    loading_animation(0.3, "exiting...")
-    loading_animation(0.9, f"Saving quiz to {filename}")
+    loading_animation(0.3, "\033[091mExiting...\033[0m")
+    loading_animation(0.9, f"Saving quiz to \033[093m{filename}\033[0m")
 
     # Write the quiz data to the file in json formatting
     file.write(str(json.dumps(quiz_data, indent=4)))
 
-    print(f"\rSuccessfully saved quiz to {filename}")
+    print(f"\rSuccessfully saved quiz to \033[093m{filename}\033[0m")
 
     # Close the file
     file.close()
@@ -109,7 +109,7 @@ def get_choices():
     # Ask the user to enter choices for A, B, C, and D
     while True:
         print("Enter the choices")
-        for option in ["a", "b", "c", "d"]:
+        for option in ["A", "B", "C", "D"]:
             choices[option] = input(f"Choice {option}: ")
         return choices # Return the dictionary of choices
 
@@ -146,5 +146,8 @@ def main():
     # Saves the data to a json file
     save_data(quiz_data)
 
-if __name__ == "__main__":
-    main()
+try:
+    if __name__ == "__main__":
+        main()
+except KeyboardInterrupt: # Properly exit program when Control + C
+    print("\033[091m\nExiting...")
