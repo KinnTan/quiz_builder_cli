@@ -29,25 +29,36 @@ This script allows users to create a custom quiz by entering questions, answer c
 
 Example interaction:
 ```
-Enter the question (or type 'exit' to quit): What is 2 + 2?
-Enter the choices
-Choice a: 3
-Choice b: 4
-Choice c: 5
-Choice d: 6
-Which is the correct choice: b
-Question added successfully
+$ python quiz_builder_cli.py
 
-Enter the question (or type 'exit' to quit): exit
-exiting...
+     ██████╗ ██╗   ██╗██╗███████╗    ██████╗ ██╗   ██╗██╗██╗     ██████╗ ███████╗██████╗      ██████╗██╗     ██╗
+    ██╔═══██╗██║   ██║██║╚══███╔╝    ██╔══██╗██║   ██║██║██║     ██╔══██╗██╔════╝██╔══██╗    ██╔════╝██║     ██║
+    ██║   ██║██║   ██║██║  ███╔╝     ██████╔╝██║   ██║██║██║     ██║  ██║█████╗  ██████╔╝    ██║     ██║     ██║
+    ██║▄▄ ██║██║   ██║██║ ███╔╝      ██╔══██╗██║   ██║██║██║     ██║  ██║██╔══╝  ██╔══██╗    ██║     ██║     ██║
+    ╚██████╔╝╚██████╔╝██║███████╗    ██████╔╝╚██████╔╝██║███████╗██████╔╝███████╗██║  ██║    ╚██████╗███████╗██║
+     ╚══▀▀═╝  ╚═════╝ ╚═╝╚══════╝    ╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝     ╚═════╝╚══════╝╚═╝
+
+Enter the question [type 'exit' to save and quit]:
+5 + 1
+Enter the choices
+Choice A: 4
+Choice B: 5
+Choice C: 6
+Choice D: 7
+Which is the correct choice: c
+Question stored successfully
+
+Enter the question [type 'exit' to save and quit]:
+exit
 Saving quiz to quiz_data.json
+Successfully saved quiz to quiz_data.json
 ```
 
 ## Notes
 - The JSON file is saved in the same directory where the script is run.
 - Each time you run the script, a new file will be created if one already exists.
 
-## Potential Improvments  <sup><sup><sub>if I can do it before deadline</sub></sup></sup>
+## Potential Improvments
 - Automatically create an output folder
 - Allow user to choose a filename
-- more UI/UX enhancment
+- more UI/UX enhancments
